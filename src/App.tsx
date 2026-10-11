@@ -8,24 +8,10 @@ import Dashboard from './pages/Dashboard';
 import TransactionsPage from './pages/TransactionsPage';
 import SimulatorPage from './pages/SimulatorPage';
 import SavingsGoalsPage from './pages/SavingsGoalsPage';
-import ComingSoonPage from './pages/ComingSoonPage';
+import ForecastPage from './pages/ForecastPage';
+import SettingsPage from './pages/SettingsPage';
 import { FinanceProvider } from './context/FinanceContext';
 import './index.css';
-
-const comingSoonPages: Record<string, { title: string; description: string; emoji: string }> = {
-  forecast: {
-    title: 'Spending Forecast',
-    emoji: '📈',
-    description:
-      'AI-powered predictions based on your spending patterns. Know if you\'ll run out before month-end — before it happens.',
-  },
-  settings: {
-    title: 'Settings',
-    emoji: '⚙️',
-    description:
-      'Customize your budget period, set category limits, configure notifications, and personalize your dashboard.',
-  },
-};
 
 function AppContent() {
   const [activePage, setActivePage] = useState<PageId>('dashboard');
@@ -45,18 +31,9 @@ function AppContent() {
       case 'goals':
         return <SavingsGoalsPage onNavigate={handleNavigate} />;
       case 'forecast':
-      case 'settings': {
-        const page = comingSoonPages[activePage];
-        return (
-          <ComingSoonPage
-            title={page.title}
-            description={page.description}
-            emoji={page.emoji}
-            onBack={() => handleNavigate('dashboard')}
-            onNavigate={handleNavigate}
-          />
-        );
-      }
+        return <ForecastPage onNavigate={handleNavigate} />;
+      case 'settings':
+        return <SettingsPage onNavigate={handleNavigate} />;
       default:
         return <Dashboard onNavigate={handleNavigate} />;
     }

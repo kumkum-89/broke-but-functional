@@ -99,9 +99,10 @@ export interface FinancialHealthScore {
 
 export interface UserSettings {
   displayName: string;
+  avatar: string;           // emoji or preset identifier
   monthlyBudget: number;
-  monthStartDay: number;       // 1–28
-  currency: 'INR';             // locked to INR for calculation safety
+  monthStartDay: number;    // 1–28
+  currency: 'INR';          // locked to INR for calculation safety
   notifyLowBalance: boolean;
   lowBalanceThreshold: number; // ₹ amount
   notifyForecastRisk: boolean;

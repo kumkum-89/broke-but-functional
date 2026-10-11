@@ -15,6 +15,7 @@ import {
   ChevronRight,
 } from 'lucide-react';
 import { useState } from 'react';
+import { useFinance } from '../context/FinanceContext';
 
 export type PageId = 'dashboard' | 'transactions' | 'goals' | 'simulator' | 'forecast' | 'settings';
 
@@ -28,11 +29,12 @@ const navItems: { id: PageId; label: string; icon: React.ElementType; badge?: st
   { id: 'transactions', label: 'Transactions', icon: ArrowLeftRight, badge: 'Stage 1' },
   { id: 'goals', label: 'Savings Goals', icon: Target, badge: 'New' },
   { id: 'simulator', label: 'Decision Sim', icon: Zap, badge: 'New' },
-  { id: 'forecast', label: 'Forecast', icon: TrendingUp, disabled: true, badge: 'Soon' },
+  { id: 'forecast', label: 'Forecast', icon: TrendingUp, badge: 'New' },
 ];
 
 export default function Sidebar({ activePage, onNavigate }: SidebarProps) {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const { settings } = useFinance();
 
   const handleNav = (id: PageId, disabled?: boolean) => {
     if (disabled) return;
@@ -89,10 +91,13 @@ export default function Sidebar({ activePage, onNavigate }: SidebarProps) {
           </div>
         </div>
 
-        {/* Demo badge */}
-        <div className="mx-4 mt-4 mb-1 px-3 py-1.5 rounded-lg bg-[#a3e635]/10 border border-[#a3e635]/20 flex items-center gap-2">
-          <span className="w-1.5 h-1.5 rounded-full bg-[#a3e635] animate-pulse-slow flex-shrink-0" />
-          <span className="text-[10px] text-[#a3e635] font-medium">DEMO · Stage 1 Preview</span>
+        {/* User profile mini */}
+        <div className="mx-4 mt-4 mb-1 px-3 py-2 rounded-lg bg-[#a3e635]/10 border border-[#a3e635]/20 flex items-center gap-2">
+          <span className="text-lg flex-shrink-0">{settings.avatar}</span>
+          <div className="min-w-0">
+            <p className="text-[11px] text-[#a3e635] font-medium truncate">{settings.displayName}</p>
+            <p className="text-[9px] text-slate-500">DEMO · Stage 1 Preview</p>
+          </div>
         </div>
 
         {/* Nav items */}
