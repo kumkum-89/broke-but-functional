@@ -5,7 +5,7 @@
 import { ArrowLeft, Search, SlidersHorizontal } from 'lucide-react';
 import { useState } from 'react';
 import TransactionItem from '../components/TransactionItem';
-import { sampleTransactions } from '../data/sampleData';
+import { useFinance } from '../context/FinanceContext';
 import { formatINR } from '../utils/formatters';
 import type { PageId } from '../components/Sidebar';
 import type { TransactionType } from '../types';
@@ -15,6 +15,7 @@ interface TransactionsPageProps {
 }
 
 export default function TransactionsPage({ onNavigate }: TransactionsPageProps) {
+  const { transactions: sampleTransactions } = useFinance();
   const [search, setSearch] = useState('');
   const [typeFilter, setTypeFilter] = useState<TransactionType | 'all'>('all');
 
@@ -114,7 +115,7 @@ export default function TransactionsPage({ onNavigate }: TransactionsPageProps) 
         </div>
 
         <p className="text-center text-[10px] text-slate-700 fade-in-up fade-in-up-5">
-          ⚠️ All data shown is demo/sample data · Transaction management coming in Stage 2
+          Showing {sampleTransactions.length} transactions · Simulator-confirmed transactions appear here instantly
         </p>
       </div>
     </div>

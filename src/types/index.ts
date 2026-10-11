@@ -57,3 +57,52 @@ export interface SpendingChartData {
   value: number;
   color: string;
 }
+
+export interface SavingsGoal {
+  id: string;
+  name: string;
+  targetAmount: number;
+  savedAmount: number;
+  targetDate?: string; // ISO date string, optional
+  createdAt: string;   // ISO date string
+  color: string;       // accent color for the progress bar
+  icon: string;        // emoji
+}
+
+// ─── Forecast ────────────────────────────────────────────────────────────────
+
+export interface ForecastDay {
+  date: string;         // 'Oct 12' format
+  dateISO: string;      // ISO date string
+  balance: number;      // projected balance at end of day
+  spending: number;     // actual or projected spend
+  isActual: boolean;    // true = historical, false = projected
+}
+
+// ─── Financial Health ────────────────────────────────────────────────────────
+
+export interface HealthFactor {
+  label: string;
+  impact: 'positive' | 'negative' | 'neutral';
+  detail: string;
+  weight: number; // 0–100 contribution to score
+}
+
+export interface FinancialHealthScore {
+  score: number;        // 0–100
+  label: string;
+  color: string;
+  factors: HealthFactor[];
+}
+
+// ─── User Settings ───────────────────────────────────────────────────────────
+
+export interface UserSettings {
+  displayName: string;
+  monthlyBudget: number;
+  monthStartDay: number;       // 1–28
+  currency: 'INR';             // locked to INR for calculation safety
+  notifyLowBalance: boolean;
+  lowBalanceThreshold: number; // ₹ amount
+  notifyForecastRisk: boolean;
+}

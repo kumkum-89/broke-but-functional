@@ -26,8 +26,8 @@ interface SidebarProps {
 const navItems: { id: PageId; label: string; icon: React.ElementType; badge?: string; disabled?: boolean }[] = [
   { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard },
   { id: 'transactions', label: 'Transactions', icon: ArrowLeftRight, badge: 'Stage 1' },
-  { id: 'goals', label: 'Savings Goals', icon: Target, disabled: true, badge: 'Soon' },
-  { id: 'simulator', label: 'Decision Sim', icon: Zap, disabled: true, badge: 'Soon' },
+  { id: 'goals', label: 'Savings Goals', icon: Target, badge: 'New' },
+  { id: 'simulator', label: 'Decision Sim', icon: Zap, badge: 'New' },
   { id: 'forecast', label: 'Forecast', icon: TrendingUp, disabled: true, badge: 'Soon' },
 ];
 

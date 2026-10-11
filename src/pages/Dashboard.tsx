@@ -1,5 +1,5 @@
 // ============================================================
-// pages/Dashboard.tsx — Main dashboard page (Stage 1)
+// pages/Dashboard.tsx — Main dashboard page (live data via FinanceContext)
 // ============================================================
 
 import {
@@ -14,21 +14,19 @@ import BudgetProgressBar from '../components/BudgetProgressBar';
 import SpendingChart from '../components/SpendingChart';
 import RecentTransactions from '../components/RecentTransactions';
 import DailyTrendChart from '../components/DailyTrendChart';
-import {
-  budgetState,
-  sampleTransactions,
-  spendingChartData,
-  dailySpendingTrend,
-} from '../data/sampleData';
-import { formatINR } from '../utils/formatters';
+import { spendingChartData, dailySpendingTrend } from '../data/sampleData';
+import { formatINR, getBudgetHealthLabel, calcPercentage } from '../utils/formatters';
 import type { PageId } from '../components/Sidebar';
+import { useFinance } from '../context/FinanceContext';
 
 interface DashboardProps {
   onNavigate: (page: PageId) => void;
 }
 
 export default function Dashboard({ onNavigate }: DashboardProps) {
-  const budget = budgetState;
+  const { budget, transactions } = useFinance();
+  const spentPct = calcPercentage(budget.totalSpent, budget.totalBudget);
+  const health = getBudgetHealthLabel(spentPct);
 
   return (
     <div className="flex-1 overflow-y-auto">
@@ -50,9 +48,17 @@ export default function Dashboard({ onNavigate }: DashboardProps) {
               Day {budget.daysElapsed} of 30 · {budget.daysRemaining} days left in your ₹10K challenge
             </p>
           </div>
-          <div className="hidden sm:flex items-center gap-2 bg-[#a3e635]/10 border border-[#a3e635]/20 rounded-xl px-4 py-2">
-            <ArrowUpRight size={14} className="text-[#a3e635]" />
-            <span className="text-xs text-[#a3e635] font-semibold">Budget: Good</span>
+          <div
+            className="hidden sm:flex items-center gap-2 rounded-xl px-4 py-2 border"
+            style={{
+              background: `${health.color}15`,
+              borderColor: `${health.color}30`,
+            }}
+          >
+            <ArrowUpRight size={14} style={{ color: health.color }} />
+            <span className="text-xs font-semibold" style={{ color: health.color }}>
+              Budget: {health.label}
+            </span>
           </div>
         </div>
 
@@ -75,7 +81,7 @@ export default function Dashboard({ onNavigate }: DashboardProps) {
           <StatCard
             title="Total Spent"
             value={formatINR(budget.totalSpent)}
-            subtitle={`${Math.round((budget.totalSpent / budget.totalBudget) * 100)}% of ₹10,000 budget`}
+            subtitle={`${spentPct}% of ₹10,000 budget`}
             icon={TrendingDown}
             iconColor="#a78bfa"
             iconBg="rgba(167,139,250,0.12)"
@@ -108,7 +114,7 @@ export default function Dashboard({ onNavigate }: DashboardProps) {
 
         {/* ── Transactions ── */}
         <RecentTransactions
-          transactions={sampleTransactions}
+          transactions={transactions}
           onViewAll={() => onNavigate('transactions')}
         />
       </div>

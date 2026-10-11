@@ -1,27 +1,18 @@
 // ============================================================
-// App.tsx — Root application with routing (Stage 1)
+// App.tsx — Root application with routing
 // ============================================================
 
 import { useState } from 'react';
 import Sidebar, { type PageId } from './components/Sidebar';
 import Dashboard from './pages/Dashboard';
 import TransactionsPage from './pages/TransactionsPage';
+import SimulatorPage from './pages/SimulatorPage';
+import SavingsGoalsPage from './pages/SavingsGoalsPage';
 import ComingSoonPage from './pages/ComingSoonPage';
+import { FinanceProvider } from './context/FinanceContext';
 import './index.css';
 
 const comingSoonPages: Record<string, { title: string; description: string; emoji: string }> = {
-  goals: {
-    title: 'Savings Goals',
-    emoji: '🎯',
-    description:
-      'Set custom savings targets — new phone, trip to Goa, emergency fund. Track progress and celebrate every milestone.',
-  },
-  simulator: {
-    title: 'Decision Simulator',
-    emoji: '⚡',
-    description:
-      'Play out financial "what-ifs" before you spend. See how a splurge today impacts your week, or what skipping chai buys you in a month.',
-  },
   forecast: {
     title: 'Spending Forecast',
     emoji: '📈',
@@ -36,7 +27,7 @@ const comingSoonPages: Record<string, { title: string; description: string; emoj
   },
 };
 
-export default function App() {
+function AppContent() {
   const [activePage, setActivePage] = useState<PageId>('dashboard');
 
   const handleNavigate = (page: PageId) => {
@@ -49,8 +40,10 @@ export default function App() {
         return <Dashboard onNavigate={handleNavigate} />;
       case 'transactions':
         return <TransactionsPage onNavigate={handleNavigate} />;
-      case 'goals':
       case 'simulator':
+        return <SimulatorPage onNavigate={handleNavigate} />;
+      case 'goals':
+        return <SavingsGoalsPage onNavigate={handleNavigate} />;
       case 'forecast':
       case 'settings': {
         const page = comingSoonPages[activePage];
@@ -79,5 +72,13 @@ export default function App() {
         {renderPage()}
       </main>
     </div>
+  );
+}
+
+export default function App() {
+  return (
+    <FinanceProvider>
+      <AppContent />
+    </FinanceProvider>
   );
 }

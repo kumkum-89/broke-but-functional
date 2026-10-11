@@ -159,4 +159,152 @@
   .fade-in-up-3 { animation-delay: 0.15s; opacity: 0; }
   .fade-in-up-4 { animation-delay: 0.2s; opacity: 0; }
   .fade-in-up-5 { animation-delay: 0.25s; opacity: 0; }
+
+  /* ── Simulator ─────────────────────────────────────────── */
+
+  .sim-metric-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 0;
+    gap: 8px;
+  }
+
+  .sim-metric-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-width: 0;
+    flex-shrink: 0;
+    width: 160px;
+  }
+
+  .sim-metric-label span {
+    font-size: 12px;
+    color: #94a3b8;
+    white-space: nowrap;
+  }
+
+  .sim-metric-icon {
+    width: 28px;
+    height: 28px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .sim-metric-values {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex: 1;
+    justify-content: flex-end;
+  }
+
+  .sim-value {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    min-width: 72px;
+  }
+
+  .sim-value-label {
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: #475569;
+    margin-bottom: 1px;
+  }
+
+  .sim-value-amount {
+    font-size: 13px;
+    font-weight: 700;
+    color: #cbd5e1;
+  }
+
+  .sim-arrow {
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+  }
+
+  .sim-delta {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    padding: 2px 7px;
+    border-radius: 20px;
+    font-size: 10px;
+    font-weight: 600;
+    border: 1px solid transparent;
+    white-space: nowrap;
+  }
+
+  .sim-divider {
+    height: 1px;
+    background: rgba(21, 34, 82, 0.6);
+    margin: 0 -4px;
+  }
+
+  .sim-risk-badge {
+    font-size: 11px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 20px;
+    border: 1px solid transparent;
+  }
+
+  .sim-cta-button {
+    box-shadow: 0 0 24px rgba(163, 230, 53, 0.2), 0 4px 12px rgba(0,0,0,0.4);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+
+  .sim-cta-button:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 0 32px rgba(163, 230, 53, 0.35), 0 6px 20px rgba(0,0,0,0.5);
+  }
+
+  .sim-cta-button:active:not(:disabled) {
+    transform: translateY(0);
+  }
+
+  .sim-confirm-button {
+    box-shadow: 0 0 20px rgba(163, 230, 53, 0.25), 0 4px 12px rgba(0,0,0,0.4);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+
+  .sim-confirm-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 30px rgba(163, 230, 53, 0.4), 0 6px 20px rgba(0,0,0,0.5);
+  }
+
+  @keyframes successRing {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(163, 230, 53, 0.4); }
+    50% { box-shadow: 0 0 0 12px rgba(163, 230, 53, 0); }
+  }
+
+  .sim-success-ring {
+    animation: successRing 2s ease-in-out 3;
+  }
+
+  @media (max-width: 480px) {
+    .sim-metric-label {
+      width: 120px;
+    }
+    .sim-metric-label span {
+      font-size: 11px;
+    }
+    .sim-value {
+      min-width: 58px;
+    }
+    .sim-value-amount {
+      font-size: 11px;
+    }
+    .sim-delta {
+      display: none;
+    }
+  }
 }
