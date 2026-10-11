@@ -110,11 +110,10 @@ function GoalModal({
                 <button
                   key={e}
                   onClick={() => set('icon', e)}
-                  className={`w-9 h-9 rounded-lg flex items-center justify-center text-lg transition-all border ${
-                    form.icon === e
-                      ? 'bg-[#a3e635]/15 border-[#a3e635]/40 scale-110'
-                      : 'border-[#152252]/60 hover:border-[#a3e635]/20'
-                  }`}
+                  className={`w-9 h-9 rounded-lg flex items-center justify-center text-lg transition-all border ${form.icon === e
+                    ? 'bg-[#a3e635]/15 border-[#a3e635]/40 scale-110'
+                    : 'border-[#152252]/60 hover:border-[#a3e635]/20'
+                    }`}
                 >
                   {e}
                 </button>
@@ -190,10 +189,9 @@ function GoalModal({
                 <button
                   key={c}
                   onClick={() => set('color', c)}
-                  className={`w-8 h-8 rounded-full transition-all ${
-                    form.color === c ? 'ring-2 ring-offset-2 ring-offset-[#0a1128] scale-110' : 'hover:scale-105'
-                  }`}
-                  style={{ background: c, ringColor: c }}
+                  className={`w-8 h-8 rounded-full transition-all ${form.color === c ? 'ring-2 ring-offset-2 ring-offset-[#0a1128] scale-110' : 'hover:scale-105'
+                    }`}
+                  style={{ background: c }}
                 />
               ))}
             </div>
@@ -335,11 +333,10 @@ function ContributeModal({
             <button
               key={i}
               onClick={() => { setAmount(String(p)); setError(''); }}
-              className={`flex-1 px-2 py-1.5 rounded-lg text-xs font-medium transition-all border ${
-                parseFloat(amount) === p
-                  ? 'bg-[#a3e635]/20 text-[#a3e635] border-[#a3e635]/40'
-                  : 'border-[#152252]/60 text-slate-500 hover:text-slate-300 hover:border-[#a3e635]/20'
-              }`}
+              className={`flex-1 px-2 py-1.5 rounded-lg text-xs font-medium transition-all border ${parseFloat(amount) === p
+                ? 'bg-[#a3e635]/20 text-[#a3e635] border-[#a3e635]/40'
+                : 'border-[#152252]/60 text-slate-500 hover:text-slate-300 hover:border-[#a3e635]/20'
+                }`}
             >
               {i < presets.length - 1 ? `₹${p.toLocaleString('en-IN')}` : 'Max'}
             </button>
@@ -537,13 +534,12 @@ export default function SavingsGoalsPage({ onNavigate }: SavingsGoalsPageProps) 
   const {
     savingsGoals,
     spendableBalance,
-    budget,
+
     addGoal,
     editGoal,
     deleteGoal,
     contributeToGoal,
   } = useFinance();
-
   const [showCreate, setShowCreate] = useState(false);
   const [editingGoal, setEditingGoal] = useState<SavingsGoal | null>(null);
   const [contributingGoal, setContributingGoal] = useState<SavingsGoal | null>(null);
